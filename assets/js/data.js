@@ -120,7 +120,15 @@ const CONTENT = {
      PDF/audio thật của bạn.
      ------------------------------------------------------------------ */
   lessons: [
-    ...makeLessons("hsk1-20", 15),
+    ...makeLessons("hsk1-20", 15)
+         materials: [
+      { label: "Giáo trình (PDF)", type: "PDF", url: "https://drive.google.com/file/d/1W7cf43IOTJKAQmFDHhTk30j_nJGP_6I2/preview" },
+      { label: "Sách bài tập (PDF)", type: "PDF", url: "https://drive.google.com/file/d/1na6SDt09iP5BXP_A5NIRlHssvcJnK6Q2/preview" }
+    ],
+    audios: [
+      { name: "Bài 1 — Audio", src: "https://drive.google.com/file/d/1iFND3SDL8rhxBuFdcMjWiHC8COsULkWm/view?usp=drive_link" }
+    ]
+  },
     ...makeLessons("hsk2-20", 15),
     ...makeLessons("hsk3-20", 20),
     ...makeLessons("hsk4-thuong-20", 10),
@@ -259,32 +267,3 @@ const CONTENT = {
   ]
 };
 
-/* ==========================================================================
-   GHI ĐÈ TỪNG BÀI HỌC CỤ THỂ
-   ==========================================================================
-   Mục "lessons" ở trên được SINH TỰ ĐỘNG (mỗi bài đều có link giả FILE_ID).
-   Đây là nơi bạn điền link PDF / sách bài tập / audio THẬT cho từng bài,
-   mà không cần đụng vào makeLessons() hay các bài khác trong cùng quyển.
-
-   CÁCH DÙNG: thêm 1 dòng, với khoá là "id" của bài (dạng "tenQuyen-baiN"),
-   value là các trường muốn ghi đè (thường là materials và audios).
-
-   Ví dụ dưới đây đã điền sẵn cho "Bài 1" của quyển "Giáo trình chuẩn HSK 1
-   (2.0)" (id quyển là "hsk1-20", nên id bài là "hsk1-20-bai1") — bạn chỉ
-   cần thay 3 chỗ ĐƯỜNG_DẪN bằng link thật của mình.
-   ========================================================================== */
-const LESSON_OVERRIDES = {
-  "hsk1-20-bai1": {
-    materials: [
-      { label: "Giáo trình (PDF)", type: "PDF", url: "https://drive.google.com/file/d/1W7cf43IOTJKAQmFDHhTk30j_nJGP_6I2/preview" },
-      { label: "Sách bài tập (PDF)", type: "PDF", url: "https://drive.google.com/file/d/1na6SDt09iP5BXP_A5NIRlHssvcJnK6Q2/preview" }
-    ],
-    audios: [
-      { name: "Bài 1 — Audio", src: "https://drive.google.com/file/d/1iFND3SDL8rhxBuFdcMjWiHC8COsULkWm/view?usp=drive_link" }
-    ]
-  }
-  // Thêm bài khác: sao chép khối trên, đổi "hsk1-20-bai1" thành id bài muốn sửa
-};
-
-// Áp dụng các ghi đè ở trên vào danh sách bài học (không cần sửa dòng này)
-CONTENT.lessons = CONTENT.lessons.map(l => LESSON_OVERRIDES[l.id] ? { ...l, ...LESSON_OVERRIDES[l.id] } : l);
