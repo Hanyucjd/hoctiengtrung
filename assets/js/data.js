@@ -239,3 +239,33 @@ const CONTENT = {
     // Thêm chủ đề mới: sao chép cả khối { topic: ..., videos: [...] }
   ]
 };
+
+/* ==========================================================================
+   GHI ĐÈ TỪNG BÀI HỌC CỤ THỂ
+   ==========================================================================
+   Mục "lessons" ở trên được SINH TỰ ĐỘNG (mỗi bài đều có link giả FILE_ID).
+   Đây là nơi bạn điền link PDF / sách bài tập / audio THẬT cho từng bài,
+   mà không cần đụng vào makeLessons() hay các bài khác trong cùng quyển.
+
+   CÁCH DÙNG: thêm 1 dòng, với khoá là "id" của bài (dạng "tenQuyen-baiN"),
+   value là các trường muốn ghi đè (thường là materials và audios).
+
+   Ví dụ dưới đây đã điền sẵn cho "Bài 1" của quyển "Giáo trình chuẩn HSK 1
+   (2.0)" (id quyển là "hsk1-20", nên id bài là "hsk1-20-bai1") — bạn chỉ
+   cần thay 3 chỗ ĐƯỜNG_DẪN bằng link thật của mình.
+   ========================================================================== */
+const LESSON_OVERRIDES = {
+  "hsk1-20-bai1": {
+    materials: [
+      { label: "Giáo trình (PDF)", type: "PDF", url: "ĐƯỜNG_DẪN_FILE_GIAO_TRINH" },
+      { label: "Sách bài tập (PDF)", type: "PDF", url: "ĐƯỜNG_DẪN_FILE_BAI_TAP" }
+    ],
+    audios: [
+      { name: "Bài 1 — Audio", src: "ĐƯỜNG_DẪN_FILE_AUDIO" }
+    ]
+  }
+  // Thêm bài khác: sao chép khối trên, đổi "hsk1-20-bai1" thành id bài muốn sửa
+};
+
+// Áp dụng các ghi đè ở trên vào danh sách bài học (không cần sửa dòng này)
+CONTENT.lessons = CONTENT.lessons.map(l => LESSON_OVERRIDES[l.id] ? { ...l, ...LESSON_OVERRIDES[l.id] } : l);
