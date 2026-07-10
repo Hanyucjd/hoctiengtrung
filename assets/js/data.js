@@ -1,36 +1,11 @@
 /* ==========================================================================
    DATA.JS — Đây là nơi DUY NHẤT bạn cần chỉnh sửa để thêm nội dung mới.
-   Không cần biết lập trình, chỉ cần sao chép 1 khối (giữa { và }) và sửa lại
-   thông tin bên trong. Nhớ giữ đúng dấu phẩy, dấu ngoặc kép "..." và ngoặc { }.
+   Không cần biết lập trình, chỉ cần tìm đúng bài và sửa lại giá trị trong
+   dấu ngoặc kép "..." . Nhớ giữ đúng dấu phẩy, dấu ngoặc kép và ngoặc { }.
 
-   Hướng dẫn chi tiết (lấy link Google Drive, thêm bài học hàng loạt...) nằm
+   Hướng dẫn chi tiết (lấy link Google Drive, thêm bộ/quyển/bài mới...) nằm
    trong README.md ở thư mục gốc.
    ========================================================================== */
-
-/* --------------------------------------------------------------------------
-   HÀM TIỆN ÍCH — tự động sinh ra nhiều "Bài" giống nhau cho một quyển giáo
-   trình, để bạn không phải gõ tay từng bài một (1 quyển có thể có 10-20 bài).
-   Sau khi sinh ra, bạn chỉ cần vào từng bài để SỬA LẠI đường dẫn PDF/audio
-   cho đúng với file thật của mình (xem README mục 2.3).
-   -------------------------------------------------------------------------- */
-function makeLessons(volumeId, count){
-  const lessons = [];
-  for(let i = 1; i <= count; i++){
-    lessons.push({
-      id: `${volumeId}-bai${i}`,
-      volumeId: volumeId,
-      title: `Bài ${i}`,
-      materials: [
-        { label: "Giáo trình (PDF)", type: "PDF", url: "https://drive.google.com/file/d/FILE_ID/preview" },
-        { label: "Sách bài tập (PDF)", type: "PDF", url: "https://drive.google.com/file/d/FILE_ID/preview" }
-      ],
-      audios: [
-        { name: `Bài ${i} — Audio`, src: `assets/audio/${volumeId}-bai${i}.mp3` }
-      ]
-    });
-  }
-  return lessons;
-}
 
 const CONTENT = {
 
@@ -114,32 +89,2106 @@ const CONTENT = {
     // Thêm quyển mới cho 1 bộ đã có: sao chép 1 dòng trên, giữ đúng seriesId
   ],
 
-  /* ------------------------------------------------------------------
-     Các BÀI trong từng quyển — sinh tự động bằng makeLessons(volumeId, số bài).
-     Sau khi sinh, vào README mục 2.3 để biết cách sửa từng bài cho đúng file
-     PDF/audio thật của bạn.
-     ------------------------------------------------------------------ */
+  /* ==========================================================================
+     CÁC BÀI HỌC — liệt kê đầy đủ TỪNG BÀI MỘT (170 bài), không dùng hàm sinh
+     tự động nữa. Muốn sửa link PDF / audio của bài nào, chỉ cần Ctrl+F tìm
+     đúng "id" của bài đó (ví dụ "hsk1-20-bai1"), rồi sửa 3 chỗ url/src.
+
+     Mỗi bài có dạng:
+       {
+         id: "...",            → mã riêng của bài, không sửa
+         volumeId: "...",      → quyển chứa bài này, không sửa
+         title: "...",         → tên hiển thị của bài, có thể sửa nếu muốn
+         materials: [ ... ],   → 2 file PDF: Giáo trình + Sách bài tập
+         audios: [ ... ]       → 1 file audio đi kèm
+       }
+
+     CÁCH ĐIỀN LINK PDF (Google Drive):
+       1. Tải file PDF lên Google Drive → Chuột phải → Chia sẻ → đổi thành
+          "Bất kỳ ai có đường liên kết".
+       2. Sao chép link dạng: https://drive.google.com/file/d/1AbCDeFGhIJ.../view?usp=sharing
+       3. Lấy đoạn mã ở giữa (1AbCDeFGhIJ...) ghép vào theo mẫu:
+          https://drive.google.com/file/d/1AbCDeFGhIJ.../preview
+       4. Dán link "…/preview" đó vào chỗ url tương ứng, thay cho chữ
+          DAN_LINK_PDF_GIAO_TRINH hoặc DAN_LINK_PDF_BAI_TAP.
+
+     CÁCH ĐIỀN FILE AUDIO:
+       - Đặt file .mp3 vào thư mục assets/audio/, rồi sửa "src" thành đúng
+         tên file đó, ví dụ: src: "assets/audio/hsk1-20-bai1.mp3"
+       - Hoặc nếu audio để trên Google Drive, dùng link dạng:
+         https://drive.google.com/uc?export=download&id=1AbCDeFGhIJ...
+     ========================================================================== */
   lessons: [
-    ...makeLessons("hsk1-20", 15),
-    ...makeLessons("hsk2-20", 15),
-    ...makeLessons("hsk3-20", 20),
-    ...makeLessons("hsk4-thuong-20", 10),
-    ...makeLessons("hsk4-ha-20", 10),
-    ...makeLessons("hsk5-thuong-20", 10),
-    ...makeLessons("hsk5-ha-20", 10),
-    ...makeLessons("hsk6-thuong-20", 10),
-    ...makeLessons("hsk6-ha-20", 10),
 
-    ...makeLessons("hsk1-30", 10),
-    ...makeLessons("hsk2-30", 10),
+    // ==================== hsk1-20 (15 bài) ====================
+    {
+      id: "hsk1-20-bai1",
+      volumeId: "hsk1-20",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/hsk1-20-bai1.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai2",
+      volumeId: "hsk1-20",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/hsk1-20-bai2.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai3",
+      volumeId: "hsk1-20",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/hsk1-20-bai3.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai4",
+      volumeId: "hsk1-20",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/hsk1-20-bai4.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai5",
+      volumeId: "hsk1-20",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/hsk1-20-bai5.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai6",
+      volumeId: "hsk1-20",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/hsk1-20-bai6.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai7",
+      volumeId: "hsk1-20",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/hsk1-20-bai7.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai8",
+      volumeId: "hsk1-20",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/hsk1-20-bai8.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai9",
+      volumeId: "hsk1-20",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/hsk1-20-bai9.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai10",
+      volumeId: "hsk1-20",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/hsk1-20-bai10.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai11",
+      volumeId: "hsk1-20",
+      title: "Bài 11",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 11 — Audio", src: "assets/audio/hsk1-20-bai11.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai12",
+      volumeId: "hsk1-20",
+      title: "Bài 12",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 12 — Audio", src: "assets/audio/hsk1-20-bai12.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai13",
+      volumeId: "hsk1-20",
+      title: "Bài 13",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 13 — Audio", src: "assets/audio/hsk1-20-bai13.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai14",
+      volumeId: "hsk1-20",
+      title: "Bài 14",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 14 — Audio", src: "assets/audio/hsk1-20-bai14.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-20-bai15",
+      volumeId: "hsk1-20",
+      title: "Bài 15",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 15 — Audio", src: "assets/audio/hsk1-20-bai15.mp3" }
+      ]
+    },
 
-    ...makeLessons("han-ngu-1", 10),
-    ...makeLessons("han-ngu-2", 10),
+    // ==================== hsk2-20 (15 bài) ====================
+    {
+      id: "hsk2-20-bai1",
+      volumeId: "hsk2-20",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/hsk2-20-bai1.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai2",
+      volumeId: "hsk2-20",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/hsk2-20-bai2.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai3",
+      volumeId: "hsk2-20",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/hsk2-20-bai3.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai4",
+      volumeId: "hsk2-20",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/hsk2-20-bai4.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai5",
+      volumeId: "hsk2-20",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/hsk2-20-bai5.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai6",
+      volumeId: "hsk2-20",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/hsk2-20-bai6.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai7",
+      volumeId: "hsk2-20",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/hsk2-20-bai7.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai8",
+      volumeId: "hsk2-20",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/hsk2-20-bai8.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai9",
+      volumeId: "hsk2-20",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/hsk2-20-bai9.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai10",
+      volumeId: "hsk2-20",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/hsk2-20-bai10.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai11",
+      volumeId: "hsk2-20",
+      title: "Bài 11",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 11 — Audio", src: "assets/audio/hsk2-20-bai11.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai12",
+      volumeId: "hsk2-20",
+      title: "Bài 12",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 12 — Audio", src: "assets/audio/hsk2-20-bai12.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai13",
+      volumeId: "hsk2-20",
+      title: "Bài 13",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 13 — Audio", src: "assets/audio/hsk2-20-bai13.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai14",
+      volumeId: "hsk2-20",
+      title: "Bài 14",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 14 — Audio", src: "assets/audio/hsk2-20-bai14.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-20-bai15",
+      volumeId: "hsk2-20",
+      title: "Bài 15",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 15 — Audio", src: "assets/audio/hsk2-20-bai15.mp3" }
+      ]
+    },
 
-    ...makeLessons("boya-so-cap-1", 10),
+    // ==================== hsk3-20 (20 bài) ====================
+    {
+      id: "hsk3-20-bai1",
+      volumeId: "hsk3-20",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/hsk3-20-bai1.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai2",
+      volumeId: "hsk3-20",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/hsk3-20-bai2.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai3",
+      volumeId: "hsk3-20",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/hsk3-20-bai3.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai4",
+      volumeId: "hsk3-20",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/hsk3-20-bai4.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai5",
+      volumeId: "hsk3-20",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/hsk3-20-bai5.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai6",
+      volumeId: "hsk3-20",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/hsk3-20-bai6.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai7",
+      volumeId: "hsk3-20",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/hsk3-20-bai7.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai8",
+      volumeId: "hsk3-20",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/hsk3-20-bai8.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai9",
+      volumeId: "hsk3-20",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/hsk3-20-bai9.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai10",
+      volumeId: "hsk3-20",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/hsk3-20-bai10.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai11",
+      volumeId: "hsk3-20",
+      title: "Bài 11",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 11 — Audio", src: "assets/audio/hsk3-20-bai11.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai12",
+      volumeId: "hsk3-20",
+      title: "Bài 12",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 12 — Audio", src: "assets/audio/hsk3-20-bai12.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai13",
+      volumeId: "hsk3-20",
+      title: "Bài 13",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 13 — Audio", src: "assets/audio/hsk3-20-bai13.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai14",
+      volumeId: "hsk3-20",
+      title: "Bài 14",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 14 — Audio", src: "assets/audio/hsk3-20-bai14.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai15",
+      volumeId: "hsk3-20",
+      title: "Bài 15",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 15 — Audio", src: "assets/audio/hsk3-20-bai15.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai16",
+      volumeId: "hsk3-20",
+      title: "Bài 16",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 16 — Audio", src: "assets/audio/hsk3-20-bai16.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai17",
+      volumeId: "hsk3-20",
+      title: "Bài 17",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 17 — Audio", src: "assets/audio/hsk3-20-bai17.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai18",
+      volumeId: "hsk3-20",
+      title: "Bài 18",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 18 — Audio", src: "assets/audio/hsk3-20-bai18.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai19",
+      volumeId: "hsk3-20",
+      title: "Bài 19",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 19 — Audio", src: "assets/audio/hsk3-20-bai19.mp3" }
+      ]
+    },
+    {
+      id: "hsk3-20-bai20",
+      volumeId: "hsk3-20",
+      title: "Bài 20",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 20 — Audio", src: "assets/audio/hsk3-20-bai20.mp3" }
+      ]
+    },
 
-    ...makeLessons("msutong-so-cap-1", 10)
-    // Thêm bài cho 1 quyển mới: ...makeLessons("id-quyển-mới", số_bài),
+    // ==================== hsk4-thuong-20 (10 bài) ====================
+    {
+      id: "hsk4-thuong-20-bai1",
+      volumeId: "hsk4-thuong-20",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/hsk4-thuong-20-bai1.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-thuong-20-bai2",
+      volumeId: "hsk4-thuong-20",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/hsk4-thuong-20-bai2.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-thuong-20-bai3",
+      volumeId: "hsk4-thuong-20",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/hsk4-thuong-20-bai3.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-thuong-20-bai4",
+      volumeId: "hsk4-thuong-20",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/hsk4-thuong-20-bai4.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-thuong-20-bai5",
+      volumeId: "hsk4-thuong-20",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/hsk4-thuong-20-bai5.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-thuong-20-bai6",
+      volumeId: "hsk4-thuong-20",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/hsk4-thuong-20-bai6.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-thuong-20-bai7",
+      volumeId: "hsk4-thuong-20",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/hsk4-thuong-20-bai7.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-thuong-20-bai8",
+      volumeId: "hsk4-thuong-20",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/hsk4-thuong-20-bai8.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-thuong-20-bai9",
+      volumeId: "hsk4-thuong-20",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/hsk4-thuong-20-bai9.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-thuong-20-bai10",
+      volumeId: "hsk4-thuong-20",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/hsk4-thuong-20-bai10.mp3" }
+      ]
+    },
+
+    // ==================== hsk4-ha-20 (10 bài) ====================
+    {
+      id: "hsk4-ha-20-bai1",
+      volumeId: "hsk4-ha-20",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/hsk4-ha-20-bai1.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-ha-20-bai2",
+      volumeId: "hsk4-ha-20",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/hsk4-ha-20-bai2.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-ha-20-bai3",
+      volumeId: "hsk4-ha-20",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/hsk4-ha-20-bai3.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-ha-20-bai4",
+      volumeId: "hsk4-ha-20",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/hsk4-ha-20-bai4.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-ha-20-bai5",
+      volumeId: "hsk4-ha-20",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/hsk4-ha-20-bai5.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-ha-20-bai6",
+      volumeId: "hsk4-ha-20",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/hsk4-ha-20-bai6.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-ha-20-bai7",
+      volumeId: "hsk4-ha-20",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/hsk4-ha-20-bai7.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-ha-20-bai8",
+      volumeId: "hsk4-ha-20",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/hsk4-ha-20-bai8.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-ha-20-bai9",
+      volumeId: "hsk4-ha-20",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/hsk4-ha-20-bai9.mp3" }
+      ]
+    },
+    {
+      id: "hsk4-ha-20-bai10",
+      volumeId: "hsk4-ha-20",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/hsk4-ha-20-bai10.mp3" }
+      ]
+    },
+
+    // ==================== hsk5-thuong-20 (10 bài) ====================
+    {
+      id: "hsk5-thuong-20-bai1",
+      volumeId: "hsk5-thuong-20",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/hsk5-thuong-20-bai1.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-thuong-20-bai2",
+      volumeId: "hsk5-thuong-20",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/hsk5-thuong-20-bai2.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-thuong-20-bai3",
+      volumeId: "hsk5-thuong-20",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/hsk5-thuong-20-bai3.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-thuong-20-bai4",
+      volumeId: "hsk5-thuong-20",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/hsk5-thuong-20-bai4.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-thuong-20-bai5",
+      volumeId: "hsk5-thuong-20",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/hsk5-thuong-20-bai5.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-thuong-20-bai6",
+      volumeId: "hsk5-thuong-20",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/hsk5-thuong-20-bai6.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-thuong-20-bai7",
+      volumeId: "hsk5-thuong-20",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/hsk5-thuong-20-bai7.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-thuong-20-bai8",
+      volumeId: "hsk5-thuong-20",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/hsk5-thuong-20-bai8.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-thuong-20-bai9",
+      volumeId: "hsk5-thuong-20",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/hsk5-thuong-20-bai9.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-thuong-20-bai10",
+      volumeId: "hsk5-thuong-20",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/hsk5-thuong-20-bai10.mp3" }
+      ]
+    },
+
+    // ==================== hsk5-ha-20 (10 bài) ====================
+    {
+      id: "hsk5-ha-20-bai1",
+      volumeId: "hsk5-ha-20",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/hsk5-ha-20-bai1.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-ha-20-bai2",
+      volumeId: "hsk5-ha-20",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/hsk5-ha-20-bai2.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-ha-20-bai3",
+      volumeId: "hsk5-ha-20",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/hsk5-ha-20-bai3.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-ha-20-bai4",
+      volumeId: "hsk5-ha-20",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/hsk5-ha-20-bai4.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-ha-20-bai5",
+      volumeId: "hsk5-ha-20",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/hsk5-ha-20-bai5.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-ha-20-bai6",
+      volumeId: "hsk5-ha-20",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/hsk5-ha-20-bai6.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-ha-20-bai7",
+      volumeId: "hsk5-ha-20",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/hsk5-ha-20-bai7.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-ha-20-bai8",
+      volumeId: "hsk5-ha-20",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/hsk5-ha-20-bai8.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-ha-20-bai9",
+      volumeId: "hsk5-ha-20",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/hsk5-ha-20-bai9.mp3" }
+      ]
+    },
+    {
+      id: "hsk5-ha-20-bai10",
+      volumeId: "hsk5-ha-20",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/hsk5-ha-20-bai10.mp3" }
+      ]
+    },
+
+    // ==================== hsk6-thuong-20 (10 bài) ====================
+    {
+      id: "hsk6-thuong-20-bai1",
+      volumeId: "hsk6-thuong-20",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/hsk6-thuong-20-bai1.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-thuong-20-bai2",
+      volumeId: "hsk6-thuong-20",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/hsk6-thuong-20-bai2.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-thuong-20-bai3",
+      volumeId: "hsk6-thuong-20",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/hsk6-thuong-20-bai3.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-thuong-20-bai4",
+      volumeId: "hsk6-thuong-20",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/hsk6-thuong-20-bai4.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-thuong-20-bai5",
+      volumeId: "hsk6-thuong-20",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/hsk6-thuong-20-bai5.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-thuong-20-bai6",
+      volumeId: "hsk6-thuong-20",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/hsk6-thuong-20-bai6.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-thuong-20-bai7",
+      volumeId: "hsk6-thuong-20",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/hsk6-thuong-20-bai7.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-thuong-20-bai8",
+      volumeId: "hsk6-thuong-20",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/hsk6-thuong-20-bai8.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-thuong-20-bai9",
+      volumeId: "hsk6-thuong-20",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/hsk6-thuong-20-bai9.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-thuong-20-bai10",
+      volumeId: "hsk6-thuong-20",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/hsk6-thuong-20-bai10.mp3" }
+      ]
+    },
+
+    // ==================== hsk6-ha-20 (10 bài) ====================
+    {
+      id: "hsk6-ha-20-bai1",
+      volumeId: "hsk6-ha-20",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/hsk6-ha-20-bai1.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-ha-20-bai2",
+      volumeId: "hsk6-ha-20",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/hsk6-ha-20-bai2.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-ha-20-bai3",
+      volumeId: "hsk6-ha-20",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/hsk6-ha-20-bai3.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-ha-20-bai4",
+      volumeId: "hsk6-ha-20",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/hsk6-ha-20-bai4.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-ha-20-bai5",
+      volumeId: "hsk6-ha-20",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/hsk6-ha-20-bai5.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-ha-20-bai6",
+      volumeId: "hsk6-ha-20",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/hsk6-ha-20-bai6.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-ha-20-bai7",
+      volumeId: "hsk6-ha-20",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/hsk6-ha-20-bai7.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-ha-20-bai8",
+      volumeId: "hsk6-ha-20",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/hsk6-ha-20-bai8.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-ha-20-bai9",
+      volumeId: "hsk6-ha-20",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/hsk6-ha-20-bai9.mp3" }
+      ]
+    },
+    {
+      id: "hsk6-ha-20-bai10",
+      volumeId: "hsk6-ha-20",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/hsk6-ha-20-bai10.mp3" }
+      ]
+    },
+
+    // ==================== hsk1-30 (10 bài) ====================
+    {
+      id: "hsk1-30-bai1",
+      volumeId: "hsk1-30",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/hsk1-30-bai1.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-30-bai2",
+      volumeId: "hsk1-30",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/hsk1-30-bai2.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-30-bai3",
+      volumeId: "hsk1-30",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/hsk1-30-bai3.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-30-bai4",
+      volumeId: "hsk1-30",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/hsk1-30-bai4.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-30-bai5",
+      volumeId: "hsk1-30",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/hsk1-30-bai5.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-30-bai6",
+      volumeId: "hsk1-30",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/hsk1-30-bai6.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-30-bai7",
+      volumeId: "hsk1-30",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/hsk1-30-bai7.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-30-bai8",
+      volumeId: "hsk1-30",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/hsk1-30-bai8.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-30-bai9",
+      volumeId: "hsk1-30",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/hsk1-30-bai9.mp3" }
+      ]
+    },
+    {
+      id: "hsk1-30-bai10",
+      volumeId: "hsk1-30",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/hsk1-30-bai10.mp3" }
+      ]
+    },
+
+    // ==================== hsk2-30 (10 bài) ====================
+    {
+      id: "hsk2-30-bai1",
+      volumeId: "hsk2-30",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/hsk2-30-bai1.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-30-bai2",
+      volumeId: "hsk2-30",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/hsk2-30-bai2.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-30-bai3",
+      volumeId: "hsk2-30",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/hsk2-30-bai3.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-30-bai4",
+      volumeId: "hsk2-30",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/hsk2-30-bai4.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-30-bai5",
+      volumeId: "hsk2-30",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/hsk2-30-bai5.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-30-bai6",
+      volumeId: "hsk2-30",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/hsk2-30-bai6.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-30-bai7",
+      volumeId: "hsk2-30",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/hsk2-30-bai7.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-30-bai8",
+      volumeId: "hsk2-30",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/hsk2-30-bai8.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-30-bai9",
+      volumeId: "hsk2-30",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/hsk2-30-bai9.mp3" }
+      ]
+    },
+    {
+      id: "hsk2-30-bai10",
+      volumeId: "hsk2-30",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/hsk2-30-bai10.mp3" }
+      ]
+    },
+
+    // ==================== han-ngu-1 (10 bài) ====================
+    {
+      id: "han-ngu-1-bai1",
+      volumeId: "han-ngu-1",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/han-ngu-1-bai1.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-1-bai2",
+      volumeId: "han-ngu-1",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/han-ngu-1-bai2.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-1-bai3",
+      volumeId: "han-ngu-1",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/han-ngu-1-bai3.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-1-bai4",
+      volumeId: "han-ngu-1",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/han-ngu-1-bai4.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-1-bai5",
+      volumeId: "han-ngu-1",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/han-ngu-1-bai5.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-1-bai6",
+      volumeId: "han-ngu-1",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/han-ngu-1-bai6.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-1-bai7",
+      volumeId: "han-ngu-1",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/han-ngu-1-bai7.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-1-bai8",
+      volumeId: "han-ngu-1",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/han-ngu-1-bai8.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-1-bai9",
+      volumeId: "han-ngu-1",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/han-ngu-1-bai9.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-1-bai10",
+      volumeId: "han-ngu-1",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/han-ngu-1-bai10.mp3" }
+      ]
+    },
+
+    // ==================== han-ngu-2 (10 bài) ====================
+    {
+      id: "han-ngu-2-bai1",
+      volumeId: "han-ngu-2",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/han-ngu-2-bai1.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-2-bai2",
+      volumeId: "han-ngu-2",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/han-ngu-2-bai2.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-2-bai3",
+      volumeId: "han-ngu-2",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/han-ngu-2-bai3.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-2-bai4",
+      volumeId: "han-ngu-2",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/han-ngu-2-bai4.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-2-bai5",
+      volumeId: "han-ngu-2",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/han-ngu-2-bai5.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-2-bai6",
+      volumeId: "han-ngu-2",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/han-ngu-2-bai6.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-2-bai7",
+      volumeId: "han-ngu-2",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/han-ngu-2-bai7.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-2-bai8",
+      volumeId: "han-ngu-2",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/han-ngu-2-bai8.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-2-bai9",
+      volumeId: "han-ngu-2",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/han-ngu-2-bai9.mp3" }
+      ]
+    },
+    {
+      id: "han-ngu-2-bai10",
+      volumeId: "han-ngu-2",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/han-ngu-2-bai10.mp3" }
+      ]
+    },
+
+    // ==================== boya-so-cap-1 (10 bài) ====================
+    {
+      id: "boya-so-cap-1-bai1",
+      volumeId: "boya-so-cap-1",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/boya-so-cap-1-bai1.mp3" }
+      ]
+    },
+    {
+      id: "boya-so-cap-1-bai2",
+      volumeId: "boya-so-cap-1",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/boya-so-cap-1-bai2.mp3" }
+      ]
+    },
+    {
+      id: "boya-so-cap-1-bai3",
+      volumeId: "boya-so-cap-1",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/boya-so-cap-1-bai3.mp3" }
+      ]
+    },
+    {
+      id: "boya-so-cap-1-bai4",
+      volumeId: "boya-so-cap-1",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/boya-so-cap-1-bai4.mp3" }
+      ]
+    },
+    {
+      id: "boya-so-cap-1-bai5",
+      volumeId: "boya-so-cap-1",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/boya-so-cap-1-bai5.mp3" }
+      ]
+    },
+    {
+      id: "boya-so-cap-1-bai6",
+      volumeId: "boya-so-cap-1",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/boya-so-cap-1-bai6.mp3" }
+      ]
+    },
+    {
+      id: "boya-so-cap-1-bai7",
+      volumeId: "boya-so-cap-1",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/boya-so-cap-1-bai7.mp3" }
+      ]
+    },
+    {
+      id: "boya-so-cap-1-bai8",
+      volumeId: "boya-so-cap-1",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/boya-so-cap-1-bai8.mp3" }
+      ]
+    },
+    {
+      id: "boya-so-cap-1-bai9",
+      volumeId: "boya-so-cap-1",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/boya-so-cap-1-bai9.mp3" }
+      ]
+    },
+    {
+      id: "boya-so-cap-1-bai10",
+      volumeId: "boya-so-cap-1",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/boya-so-cap-1-bai10.mp3" }
+      ]
+    },
+
+    // ==================== msutong-so-cap-1 (10 bài) ====================
+    {
+      id: "msutong-so-cap-1-bai1",
+      volumeId: "msutong-so-cap-1",
+      title: "Bài 1",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 1 — Audio", src: "assets/audio/msutong-so-cap-1-bai1.mp3" }
+      ]
+    },
+    {
+      id: "msutong-so-cap-1-bai2",
+      volumeId: "msutong-so-cap-1",
+      title: "Bài 2",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 2 — Audio", src: "assets/audio/msutong-so-cap-1-bai2.mp3" }
+      ]
+    },
+    {
+      id: "msutong-so-cap-1-bai3",
+      volumeId: "msutong-so-cap-1",
+      title: "Bài 3",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 3 — Audio", src: "assets/audio/msutong-so-cap-1-bai3.mp3" }
+      ]
+    },
+    {
+      id: "msutong-so-cap-1-bai4",
+      volumeId: "msutong-so-cap-1",
+      title: "Bài 4",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 4 — Audio", src: "assets/audio/msutong-so-cap-1-bai4.mp3" }
+      ]
+    },
+    {
+      id: "msutong-so-cap-1-bai5",
+      volumeId: "msutong-so-cap-1",
+      title: "Bài 5",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 5 — Audio", src: "assets/audio/msutong-so-cap-1-bai5.mp3" }
+      ]
+    },
+    {
+      id: "msutong-so-cap-1-bai6",
+      volumeId: "msutong-so-cap-1",
+      title: "Bài 6",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 6 — Audio", src: "assets/audio/msutong-so-cap-1-bai6.mp3" }
+      ]
+    },
+    {
+      id: "msutong-so-cap-1-bai7",
+      volumeId: "msutong-so-cap-1",
+      title: "Bài 7",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 7 — Audio", src: "assets/audio/msutong-so-cap-1-bai7.mp3" }
+      ]
+    },
+    {
+      id: "msutong-so-cap-1-bai8",
+      volumeId: "msutong-so-cap-1",
+      title: "Bài 8",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 8 — Audio", src: "assets/audio/msutong-so-cap-1-bai8.mp3" }
+      ]
+    },
+    {
+      id: "msutong-so-cap-1-bai9",
+      volumeId: "msutong-so-cap-1",
+      title: "Bài 9",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 9 — Audio", src: "assets/audio/msutong-so-cap-1-bai9.mp3" }
+      ]
+    },
+    {
+      id: "msutong-so-cap-1-bai10",
+      volumeId: "msutong-so-cap-1",
+      title: "Bài 10",
+      materials: [
+        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+      ],
+      audios: [
+        { name: "Bài 10 — Audio", src: "assets/audio/msutong-so-cap-1-bai10.mp3" }
+      ]
+    },
   ],
 
   /* ==========================================================================
@@ -239,33 +2288,3 @@ const CONTENT = {
     // Thêm chủ đề mới: sao chép cả khối { topic: ..., videos: [...] }
   ]
 };
-
-/* ==========================================================================
-   GHI ĐÈ TỪNG BÀI HỌC CỤ THỂ
-   ==========================================================================
-   Mục "lessons" ở trên được SINH TỰ ĐỘNG (mỗi bài đều có link giả FILE_ID).
-   Đây là nơi bạn điền link PDF / sách bài tập / audio THẬT cho từng bài,
-   mà không cần đụng vào makeLessons() hay các bài khác trong cùng quyển.
-
-   CÁCH DÙNG: thêm 1 dòng, với khoá là "id" của bài (dạng "tenQuyen-baiN"),
-   value là các trường muốn ghi đè (thường là materials và audios).
-
-   Ví dụ dưới đây đã điền sẵn cho "Bài 1" của quyển "Giáo trình chuẩn HSK 1
-   (2.0)" (id quyển là "hsk1-20", nên id bài là "hsk1-20-bai1") — bạn chỉ
-   cần thay 3 chỗ ĐƯỜNG_DẪN bằng link thật của mình.
-   ========================================================================== */
-const LESSON_OVERRIDES = {
-  "hsk1-20-bai1": {
-    materials: [
-      { label: "Giáo trình (PDF)", type: "PDF", url: "ĐƯỜNG_DẪN_FILE_GIAO_TRINH" },
-      { label: "Sách bài tập (PDF)", type: "PDF", url: "ĐƯỜNG_DẪN_FILE_BAI_TAP" }
-    ],
-    audios: [
-      { name: "Bài 1 — Audio", src: "ĐƯỜNG_DẪN_FILE_AUDIO" }
-    ]
-  }
-  // Thêm bài khác: sao chép khối trên, đổi "hsk1-20-bai1" thành id bài muốn sửa
-};
-
-// Áp dụng các ghi đè ở trên vào danh sách bài học (không cần sửa dòng này)
-CONTENT.lessons = CONTENT.lessons.map(l => LESSON_OVERRIDES[l.id] ? { ...l, ...LESSON_OVERRIDES[l.id] } : l);
