@@ -154,6 +154,14 @@ const CONTENT = {
       tag: "Từ vựng · HSK 1–2",
       file: "games/ghep-tu-pinyin.html"
     }
+    {
+      id: "lat-the",
+      title: "Lật thẻ từ vựng",
+      hanzi: "翻",
+      description: "Mở 2 thẻ từ vựng và tìm ra hai thẻ giống nhau.",
+      tag: "Từ vựng · HSK 1–2",
+      file: "games/lat-the"
+    }
     // Thêm trò chơi mới: sao chép khối trên, đổi id/title/file cho trò chơi kế tiếp
   ],
 
