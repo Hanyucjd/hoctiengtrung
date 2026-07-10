@@ -257,11 +257,11 @@ const CONTENT = {
 const LESSON_OVERRIDES = {
   "hsk1-20-bai1": {
     materials: [
-      { label: "Giáo trình (PDF)", type: "PDF", url: "ĐƯỜNG_DẪN_FILE_GIAO_TRINH" },
-      { label: "Sách bài tập (PDF)", type: "PDF", url: "ĐƯỜNG_DẪN_FILE_BAI_TAP" }
+      { label: "Giáo trình (PDF)", type: "PDF", url: "https://drive.google.com/file/d/1W7cf43IOTJKAQmFDHhTk30j_nJGP_6I2/preview" },
+      { label: "Sách bài tập (PDF)", type: "PDF", url: "https://drive.google.com/file/d/1na6SDt09iP5BXP_A5NIRlHssvcJnK6Q2/preview" }
     ],
     audios: [
-      { name: "Bài 1 — Audio", src: "ĐƯỜNG_DẪN_FILE_AUDIO" }
+      { name: "Bài 1 — Audio", src: "https://drive.google.com/file/d/1iFND3SDL8rhxBuFdcMjWiHC8COsULkWm/view?usp=drive_link" }
     ]
   }
   // Thêm bài khác: sao chép khối trên, đổi "hsk1-20-bai1" thành id bài muốn sửa
