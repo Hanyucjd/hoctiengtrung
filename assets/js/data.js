@@ -180,6 +180,17 @@ const CONTENT = {
      ========================================================================== */
   videoTopics: [
     {
+      topic: "Học theo giáo trình",
+      videos: [
+        {
+          platform: "youtube",
+          id: "Tiếng Trung Lý Dinh Trân",
+          title: "Giáo trình HSK1 (2.0) Bài 1",
+          thumb: "https://youtu.be/FmldJqW1Hd4?si=mwwttZGdjL3NXjiY"
+        }
+      ]
+    },
+     {
       topic: "Giao tiếp hằng ngày",
       videos: [
         {
