@@ -211,9 +211,9 @@ const CONTENT = {
       videos: [
         {
           platform: "youtube",
-          id: "dQw4w9WgXcQ",
-          title: "Chào hỏi và tự giới thiệu bằng tiếng Trung",
-          thumb: "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
+          id: "Lala Chinese 啦啦的中文课",
+          title: "Learn Chinese Through Vlogs | Navigating China’s Food Streets with Cash and Chinese!",
+          thumb: "https://youtu.be/LcUoiBwG-OA?si=NpzsQwojrzEjT5o3"
         }
       ]
     },
