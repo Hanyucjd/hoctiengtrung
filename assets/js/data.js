@@ -27,7 +27,7 @@ const CONTENT = {
     {
       id: "hsk2-0",
       title: "Giáo trình chuẩn HSK 2.0",
-      hanzi: "HSK标准教程2.0",
+      hanzi: "HSK标准教程",
       description: "Bộ giáo trình HSK theo khung năng lực 2.0, quen thuộc và phổ biến nhất."
     },
     {
