@@ -2268,13 +2268,13 @@ const CONTENT = {
       videos: [
         {
           platform: "youtube",
-          id: "FmldJqW1Hd4&list=PLWdpeFppXs5CSwm8R1xl2Ck6EH2fodMEZ&index=1",
+          id: "FmldJqW1Hd4",
           title: "Tiếng Trung Lý Dinh TrânGiáo trình chuẩn HSK 1_Bài 1 你好_Phần 1",
           thumb: "https://youtu.be/FmldJqW1Hd4?si=LDeImffIYcxVOHge"
-        }
+        },
         {
           platform: "youtube",
-          id: "zkFTZ8pQUOc&list=PLWdpeFppXs5CSwm8R1xl2Ck6EH2fodMEZ&index=2",
+          id: "zkFTZ8pQUOc",
           title: "Tiếng Trung Lý Dinh Trân Giáo trình chuẩn HSK 1_Bài 1 你好_Phần 2",
           thumb: "https://youtu.be/zkFTZ8pQUOc?si=agT9zHEZP-RGgEQz"
         }
