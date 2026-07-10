@@ -2264,13 +2264,19 @@ const CONTENT = {
       ]
     },
     {
-      topic: "Văn mẫu",
+      topic: "Học theo giáo trình chuẩn HSK 2.0",
       videos: [
         {
           platform: "youtube",
-          id: "dQw4w9WgXcQ",
-          title: "Cách viết bài văn miêu tả bằng tiếng Trung",
-          thumb: "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg"
+          id: "FmldJqW1Hd4&list=PLWdpeFppXs5CSwm8R1xl2Ck6EH2fodMEZ&index=1",
+          title: "Tiếng Trung Lý Dinh TrânGiáo trình chuẩn HSK 1_Bài 1 你好_Phần 1",
+          thumb: "https://youtu.be/FmldJqW1Hd4?si=LDeImffIYcxVOHge"
+        }
+        {
+          platform: "youtube",
+          id: "zkFTZ8pQUOc&list=PLWdpeFppXs5CSwm8R1xl2Ck6EH2fodMEZ&index=2",
+          title: "Tiếng Trung Lý Dinh Trân Giáo trình chuẩn HSK 1_Bài 1 你好_Phần 2",
+          thumb: "https://youtu.be/zkFTZ8pQUOc?si=agT9zHEZP-RGgEQz"
         }
         // Thêm video giảng/đọc văn mẫu khác vào đây, theo mẫu YouTube hoặc TikTok ở trên
       ]
