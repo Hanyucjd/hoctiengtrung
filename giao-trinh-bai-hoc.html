@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bài học · 与周老师学中文</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="seal-mark hanzi">周</span>
+      <span class="brand-text"><span class="cn">与周老师学中文</span><span class="vn">HỌC TIẾNG TRUNG CÙNG CÔ ZHOU</span></span>
+    </a>
+    <button class="nav-toggle" aria-label="Mở menu">☰</button>
+    <nav class="main-nav">
+      <a href="index.html">Trang chủ</a>
+      <a href="giao-trinh.html" class="active">Giáo trình</a>
+      <a href="tro-choi.html">Trò chơi</a>
+      <a href="video.html">Video</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="page-head">
+    <div class="wrap">
+      <a class="back-link" id="back-to-series" href="giao-trinh.html">← Quay lại bộ giáo trình</a>
+      <p class="eyebrow" id="volume-eyebrow">本 · Quyển giáo trình</p>
+      <h1 id="volume-title">Đang tải…</h1>
+      <p class="lede" id="volume-desc"></p>
+      <div class="brush-rule"></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="course-grid" id="lesson-grid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© <span id="year"></span> Học Tiếng Trung Cùng Cô</p>
+    <p>Thêm/sửa bài học tại <code>assets/js/data.js</code> (mục <code>lessons</code>)</p>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
