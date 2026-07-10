@@ -27,31 +27,31 @@ const CONTENT = {
     {
       id: "hsk2-0",
       title: "Giáo trình chuẩn HSK 2.0",
-      hanzi: "旧",
-      description: "Bộ giáo trình HSK theo khung năng lực cũ (2.0), quen thuộc và phổ biến nhất."
+      hanzi: "HSK标准教程2.0",
+      description: "Bộ giáo trình HSK theo khung năng lực 2.0, quen thuộc và phổ biến nhất."
     },
     {
       id: "hsk3-0",
       title: "Giáo trình chuẩn HSK 3.0",
-      hanzi: "新",
-      description: "Bộ giáo trình theo khung năng lực HSK 3.0 mới, chia nhỏ cấp độ hơn."
+      hanzi: "新HSK标准教程",
+      description: "Bộ giáo trình theo khung năng lực HSK 3.0 mới, 9 cấp độ HSK."
     },
     {
       id: "han-ngu",
       title: "Giáo trình Hán ngữ",
-      hanzi: "汉",
-      description: "Giáo trình Hán ngữ kinh điển, luyện đủ 4 kỹ năng nghe – nói – đọc – viết."
+      hanzi: "汉语教程",
+      description: "Giáo trình Hán ngữ kinh điển, luyện đủ 4 kỹ năng nghe – nói – đọc – viết, gồm 6 quyển."
     },
     {
       id: "boya",
       title: "Giáo trình Boya",
-      hanzi: "博",
+      hanzi: "博雅汉语",
       description: "Giáo trình Boya, chú trọng hội thoại thực tế và tình huống giao tiếp."
     },
     {
       id: "msutong",
       title: "Giáo trình Msutong",
-      hanzi: "速",
+      hanzi: "速通汉语",
       description: "Giáo trình Msutong dùng cho sinh viên quốc tế, tốc độ vừa phải, nhiều bài luyện tập."
     }
     // Thêm bộ giáo trình mới: sao chép 1 khối trên, đổi id/title/hanzi/description
@@ -73,12 +73,14 @@ const CONTENT = {
     { id: "hsk6-ha-20",     seriesId: "hsk2-0", title: "Giáo trình chuẩn HSK 6 Hạ (2.0)",     description: "10 bài — nửa sau cấp độ 6." },
 
     // ---- Bộ HSK 3.0 (thêm ví dụ 2 quyển đầu — sao chép mẫu để thêm các cấp còn lại) ----
-    { id: "hsk1-30", seriesId: "hsk3-0", title: "Giáo trình chuẩn HSK 1 (3.0)", description: "10 bài — khung năng lực HSK 3.0, cấp 1." },
-    { id: "hsk2-30", seriesId: "hsk3-0", title: "Giáo trình chuẩn HSK 2 (3.0)", description: "10 bài — khung năng lực HSK 3.0, cấp 2." },
+    { id: "hsk1-30", seriesId: "hsk3-0", title: "Giáo trình chuẩn HSK 1 (3.0)", description: "15 bài — khung năng lực HSK 3.0, cấp 1." },
+    { id: "hsk2-30", seriesId: "hsk3-0", title: "Giáo trình chuẩn HSK 2 (3.0)", description: "15 bài — khung năng lực HSK 3.0, cấp 2." },
+    { id: "hsk3-30", seriesId: "hsk3-0", title: "Giáo trình chuẩn HSK 3 (3.0)", description: "20 bài — khung năng lực HSK 3.0, cấp 2." },
 
     // ---- Bộ Hán ngữ (ví dụ 2 quyển — thêm tương tự cho các quyển tiếp theo) ----
     { id: "han-ngu-1", seriesId: "han-ngu", title: "Giáo trình Hán ngữ 1", description: "10 bài." },
     { id: "han-ngu-2", seriesId: "han-ngu", title: "Giáo trình Hán ngữ 2", description: "10 bài." },
+    { id: "han-ngu-3", seriesId: "han-ngu", title: "Giáo trình Hán ngữ 3", description: "10 bài." },
 
     // ---- Bộ Boya (ví dụ 1 quyển — thêm tương tự cho các quyển tiếp theo) ----
     { id: "boya-so-cap-1", seriesId: "boya", title: "Boya Hán ngữ — Sơ cấp 1", description: "10 bài." },
@@ -126,8 +128,8 @@ const CONTENT = {
       volumeId: "hsk1-20",
       title: "Bài 1",
       materials: [
-        { label: "Giáo trình (PDF)", type: "PDF", url: "DAN_LINK_PDF_GIAO_TRINH" },
-        { label: "Sách bài tập (PDF)", type: "PDF", url: "DAN_LINK_PDF_BAI_TAP" }
+        { label: "Giáo trình (PDF)", type: "PDF", url: "https://drive.google.com/file/d/1W7cf43IOTJKAQmFDHhTk30j_nJGP_6I2/preview" },
+        { label: "Sách bài tập (PDF)", type: "PDF", url: "https://drive.google.com/file/d/1j1RG-hnisLINyzmsvSVdkkYymYyp7ts-/preview" }
       ],
       audios: [
         { name: "Bài 1 — Audio", src: "assets/audio/hsk1-20-bai1.mp3" }
